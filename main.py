@@ -21,9 +21,11 @@ y_raw = DATA.target
 x_raw.head()
 y_raw.head()
 
+
 def cleaning_sentence(text):
     text = re.sub('@\S+|https?:\S+|http?:\S|[^A-Za-z0-9]+', ' ', str(text).lower()).strip()
     return text
+
 
 def removing_stop_words(text):
     words = text.split()
@@ -34,6 +36,7 @@ def removing_stop_words(text):
             res.append(word)
     return ' '.join(res)
 
+
 def stemming_words(text):
     words = text.split()
     res = []
@@ -41,7 +44,8 @@ def stemming_words(text):
         res.append(STEMMER.stem(word))
     return ' '.join(res) 
 
-def text_preprocess(text):
+
+def text_pre_process(text):
     cleaned = cleaning_sentence(text)
     removed = removing_stop_words(cleaned)
     stemmed = stemming_words(removed)
@@ -49,9 +53,13 @@ def text_preprocess(text):
 
 
 def clean(x,y):
-    x_clean = x.apply(lambda item:text_preprocess(item))
+    x_clean = x.apply(lambda item: text_pre_process(item))
     return x_clean, y
 
-X,Y = clean(x_raw, y_raw)
+
+def main():
+    X,Y = clean(x_raw, y_raw)
 
 
+if __name__ == '__main__':
+    main()
