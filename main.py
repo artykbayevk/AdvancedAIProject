@@ -13,7 +13,7 @@ DATA_DIR_PATH = 'data'
 DATA_FILE_PATH = os.path.join(DATA_DIR_PATH, 'training.1600000.processed.noemoticon.csv')
 DATA = pd.read_csv(DATA_FILE_PATH, encoding = "ISO-8859-1", names = ["target", "ids", "data", 'flag', "user", "text"])
 
-target_encoding = {0:"neg", 2:'neu', 4:'pos'}
+target_encoding = {0: "neg", 2: 'neu', 4: 'pos'}
 
 x_raw = DATA.text
 y_raw = DATA.target
