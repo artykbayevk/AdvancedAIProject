@@ -1,10 +1,13 @@
 import os
 import re
-import gensim
+
 import numpy as np
 import pandas as pd
 from nltk.corpus import stopwords
+from gensim.models import KeyedVectors,Word2Vec
 from nltk.stem.snowball import SnowballStemmer
+
+
 
 STOPWORDS = stopwords.words("english")
 STEMMER = SnowballStemmer("english")
@@ -12,6 +15,10 @@ STEMMER = SnowballStemmer("english")
 DATA_DIR_PATH = 'data'
 DATA_FILE_PATH = os.path.join(DATA_DIR_PATH, 'training.1600000.processed.noemoticon.csv')
 DATA = pd.read_csv(DATA_FILE_PATH, encoding = "ISO-8859-1", names = ["target", "ids", "data", 'flag', "user", "text"])
+
+
+WORD2VEC_PATH = os.path.join(DATA_DIR_PATH,'GoogleNews-vectors-negative300.bin.gz' )
+model = KeyedVectors.load_word2vec_format(WORD2VEC_PATH, binary=True)
 
 target_encoding = {0: "neg", 2: 'neu', 4: 'pos'}
 
@@ -56,11 +63,7 @@ def clean(x, y):
     x_clean = x.apply(lambda item: text_pre_process(item))
     return x_clean, y
 
-
-def main():
-    X, Y = clean(x_raw, y_raw)
-    print(X)
+X, Y = clean(x_raw, y_raw)
 
 
-if __name__ == '__main__':
-    main()
+model
