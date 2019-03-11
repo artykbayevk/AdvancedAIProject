@@ -8,7 +8,6 @@ from gensim.models import KeyedVectors,Word2Vec
 from nltk.stem.snowball import SnowballStemmer
 
 
-
 STOPWORDS = stopwords.words("english")
 STEMMER = SnowballStemmer("english")
 
@@ -17,7 +16,7 @@ DATA_FILE_PATH = os.path.join(DATA_DIR_PATH, 'training.1600000.processed.noemoti
 DATA = pd.read_csv(DATA_FILE_PATH, encoding = "ISO-8859-1", names = ["target", "ids", "data", 'flag', "user", "text"])
 
 
-WORD2VEC_PATH = os.path.join(DATA_DIR_PATH,'GoogleNews-vectors-negative300.bin.gz' )
+WORD2VEC_PATH = os.path.join(DATA_DIR_PATH,'GoogleNews-vectors-negative300.bin.gz')
 model = KeyedVectors.load_word2vec_format(WORD2VEC_PATH, binary=True)
 
 target_encoding = {0: "neg", 2: 'neu', 4: 'pos'}
@@ -64,6 +63,5 @@ def clean(x, y):
     return x_clean, y
 
 X, Y = clean(x_raw, y_raw)
-
 
 model
