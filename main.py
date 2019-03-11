@@ -52,13 +52,14 @@ def text_pre_process(text):
     return stemmed
 
 
-def clean(x,y):
+def clean(x, y):
     x_clean = x.apply(lambda item: text_pre_process(item))
     return x_clean, y
 
 
 def main():
-    X,Y = clean(x_raw, y_raw)
+    X, Y = clean(x_raw, y_raw)
+    print(X)
 
 
 if __name__ == '__main__':
